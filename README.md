@@ -1,5 +1,3 @@
-Here’s a draft for your README.md based on the information provided:
-
 ---
 
 # MyBLE

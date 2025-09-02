@@ -23,10 +23,28 @@ struct MyBLEApp: App {
         }
     }()
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-        .modelContainer(sharedModelContainer)
-    }
+//	var body: some Scene {
+//		WindowGroup {
+//			ContentView()
+//		}
+//		.modelContainer(sharedModelContainer)
+//	}
+
+	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+	var body: some Scene {
+		Settings { EmptyView() } // no settings window
+			.modelContainer(sharedModelContainer)
+	}
+
+}
+
+final class AppDelegate: NSObject, NSApplicationDelegate {
+	private var statusBarController: StatusBarController!
+
+	func applicationDidFinishLaunching(_ notification: Notification) {
+		let store = DeviceStore()
+		let bluetooth = BluetoothManager(store: store)
+		statusBarController = StatusBarController(store: store, bluetooth: bluetooth)
+		bluetooth.start() // set up CBCentralManager, defer scanning until user taps “Scan”
+	}
 }

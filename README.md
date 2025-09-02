@@ -39,4 +39,3 @@ This project is licensed under the MIT License.
 
 ---
 
-Would you like to add installation instructions, screenshots, or usage examples?
